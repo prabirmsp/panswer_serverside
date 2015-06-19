@@ -1,0 +1,29 @@
+<?php
+header('Content-type: text/json');
+echo 'hi';
+$mysqli = new mysqli("localhost", "root", "password", "panswer");
+
+// check connection
+if ($mysqli->connect_errno) {
+    printf("Connect failed: %s\n", $mysqli->connect_error);
+    exit();
+}
+
+echo ("connection sucessfull");
+$jsonData = new stdClass();
+$posts_items = array();
+
+if (isset($_GET[dspace_id])) { //'dspace_id' set in URL
+
+}
+
+else { // 'dspace_id' not set in URL
+	$query_str = 'SELECT * FROM ans_dspace_community where lft > (SELECT lft FROM ans_dspace_community WHERE selection_type = 1) and lft < (SELECT RGT FROM ans_dspace_community WHERE selection_type = 1) ORDER BY lft'
+	if ($result = mysqli->query($query_str)){
+		echo $result;
+	}
+	else 
+		echo ('Failed to get query from database.');
+}
+
+?>
